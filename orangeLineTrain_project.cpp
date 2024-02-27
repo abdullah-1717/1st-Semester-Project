@@ -6,18 +6,24 @@ void gender ()
     int gendeR;
     cout<<endl<<endl<<"Are you male or female:"<<endl;
     cout<<"1. for male:"<<endl;
-    cout<<"2. for female: ";
+    cout<<"2. for female: "<<endl;
+    cout<<"3. for both male & female: ";
     cin>>gendeR;
     if(gendeR == 1)
     {
-        cout<<endl<<endl<<"Go on right side";
+        cout<<endl<<endl<<"Go on right side for last coach";
     }
     else if (gendeR == 2)
     {
-        cout<<endl<<endl<<"Go on left side";
+        cout<<endl<<endl<<"Go on left side for first coach";
+    }
+    else if (gendeR == 3)
+    {
+        cout<<endl<<endl<<"Middle coach best for you";
     }
     else
     {
+        cout<<endl<<endl<<"Invalid choice: ";
         gender();
     }
 }
@@ -72,7 +78,7 @@ int tickets (int token)
         return token;
 }
 
-int destination (int current_location,string station[],int size)
+int destinationStation (int current_location,string station[],int size)
 {
     int station_count=0,destination_station, token_price=0,tokens;
     cout<<endl;
@@ -95,7 +101,7 @@ int destination (int current_location,string station[],int size)
      {
      	cout<<endl<<endl;
      	cout<<"You enter same station number for destination and current station"<<endl;
-     	destination(current_location,station,26);
+     	destinationStation(current_location,station,26);
      }
      else if (destination_station <27 && destination_station > 0)
      {
@@ -117,21 +123,21 @@ int destination (int current_location,string station[],int size)
     	cout<<"How many token do you want: "<<endl;
     	cin>>tokens;
         token_price = token_price *tokens;
-        cout<<endl<<endl<<"Ticket price for "<<tokens<<" is "<<token_price<<endl;
+        cout<<endl<<endl<<"Ticket price for "<<tokens<<" token is "<<token_price<<endl;
         priceCheck(token_price);
      }
      else
      {
      	cout<<endl<<endl;
      	cout <<"Invalid choice"<<endl;
-    	destination(current_location,station,26);
+    	destinationStation(current_location,station,26);
      }
      return station_count;
 }
 
-int manu ()
+int currentStation ()
 {
-    int current_location,station_count;
+    int current_location = 0,station_count;
     string station[26]={"Station  1: DERA GUJJRAN","Station  2: ISLAM PARK","Station  3: SALAMAT PURA","Station  4: MEHMOOD BOOTI","Station  5: PAKISTAN MINT","Station  6: SHALAMAR GARDEN","Station  7: BAGHBANPURA","Station  8: UET","Station  9: SULTANPURA","Station 10: RAILWAY STATION","Station 11: LAKSHMI","Station 12: G.P.O.","Station 13: ANARKALI","Station 14: CHAUBURJI","Station 15: GULSHAN-E-RAVI","Station 16: SAMANABAD","Station 17: BAND ROAD","Station 18: SALAHUDIN ROAD","Station 19: KHATAM-E-NABUWAT","Station 20: SABZAZAR","Station 21: AWAN TOWN","Station 22: WAHDAT ROAD","Station 23: HANJARWAL","Station 24: CANAL VIEW","Station 25: THOKAR NIAZBAIG","Station 26: ALI TOWN",};
     cout<<"Enter your current station number: "<<endl<<endl<<endl;
     for (int i = 0;i<26;i++)
@@ -142,13 +148,13 @@ int manu ()
     cin>>current_location;
     if (current_location <27 && current_location > 0)
     {
-       station_count =  destination(current_location,station,26);
+       station_count =  destinationStation(current_location,station,26);
     }
     else 
     {
     	cout<<endl<<endl;
     	cout <<"Invalid choice"<<endl;
-        manu();
+        currentStation();
     }
     return station_count;
 }
@@ -161,13 +167,9 @@ cout<<"Do you want to get token from machine or by cabin? "<<endl;
     cout<<"Enter 'm' for Machine  & 't' for Ticket Cabin: ";
     cin>>token;
     cout<<endl<<endl;
-    if(token == 'm' || token == 'M')
+    if(token == 'm' || token == 'M'||token =='t'|| token =='T')
     {
-      station_count = manu();
-    }
-    else if (token == 't' || token == 'T')
-    {
-      station_count = manu();
+      station_count = currentStation();
     }
     else
     {
@@ -180,12 +182,14 @@ cout<<"Do you want to get token from machine or by cabin? "<<endl;
 int main ()
 {
     int time, minutes,station_count;
-    cout<<"\t\tWELCOME TO ORANGE LINE TRAIN"<<endl;
+    cout<<"\n\n**********************************************"<<endl;
+    cout<<"******** WELCOME TO ORANGE LINE TRAIN ********"<<endl;
+    cout<<"**********************************************"<<endl;
     station_count = token_place();
     cout<<endl<<endl<<"Now time"<<endl;
     cout<<__TIME__<<endl;
     minutes = atoi(&__TIME__[3]);
-    time = 5- minutes % 5 ;
+    time = 5- minutes % 5;
     if (time == 5)
     {
         cout<<endl<<endl<<"Train is arrived"<<endl;
@@ -194,7 +198,9 @@ int main ()
     {
        cout<<endl<<endl<<time<<" Minutes are left:"<<endl;
     }
-    station_count *= 2;
+    station_count = station_count * 2;
     cout<<endl<<endl<<"Time required for destination: "<<station_count<<" Minutes"<<endl;
-    cout<<endl<<endl<<"THANK YOU FOR USING OUR SERVICE"<<endl;
+    cout<<"\n\n*********************************************"<<endl;
+    cout<<"****** THANK YOU FOR USING OUR SERVICE ******"<<endl;
+    cout<<"*********************************************"<<endl;
 }
